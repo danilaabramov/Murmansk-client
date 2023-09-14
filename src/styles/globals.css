@@ -1,3 +1,7 @@
+body {
+    background: #F8F8F8;
+}
+
 ::-webkit-input-placeholder {
     color: #C2C3CB;
 }

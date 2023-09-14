@@ -1,12 +1,12 @@
 import '@/styles/globals.css'
 import '@/styles/reset.css'
+import React, {ReactNode} from 'react'
 import type {Metadata} from 'next'
 import {Montserrat} from 'next/font/google'
-import React, {ReactNode} from 'react'
 import {NextFont} from "next/dist/compiled/@next/font";
 import Head from "next/head";
 import Header from "@/app/Header";
-import StyledComponentsRegistry from '../lib/registry'
+import StyledComponentsRegistry from '@/lib/registry'
 
 const inter: NextFont = Montserrat({weight: '400', subsets: ['latin', 'cyrillic']})
 

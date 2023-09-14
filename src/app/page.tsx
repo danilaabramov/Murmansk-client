@@ -1,6 +1,9 @@
+import Cards from "@/app/Cards";
 
 export default function Home() {
   return (
-      <div>Главная страница</div>
+      <div>
+        <Cards/>
+      </div>
   )
 }

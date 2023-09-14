@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import styled from "styled-components";
 import Cart from "@/icons/Cart";
 import Chat from "@/icons/Chat";
@@ -8,7 +9,8 @@ import Magnifier from "@/icons/Magnifier";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Montserrat} from "next/font/google";
 
-const inter: NextFont = Montserrat({weight: '500', subsets: ['latin', 'cyrillic']})
+const inter500: NextFont = Montserrat({weight: '500', subsets: ['latin', 'cyrillic']})
+const inter700: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
 
 const HeaderContainer = styled.header`
   height: 100px;
@@ -17,11 +19,16 @@ const HeaderContainer = styled.header`
   gap: 20px;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px;
 `;
 
 const Logo = styled.div`
+  height: 57px;
   width: 170px;
   cursor: pointer;
+  font-size: 32px;
+  line-height: 57px;
+  padding-left: 67px;
 `
 
 const Catalog = styled.div`
@@ -70,9 +77,9 @@ export default function Header() {
     return (
         <div>
             <HeaderContainer>
-                <Logo/>
+                <Logo className={inter700.className}>Свой</Logo>
                 <Catalog/>
-                <Search style={inter.style}>
+                <Search className={inter500.className}>
                     <Magnifier/>
                     <InputSearch placeholder='Найти'/>
                 </Search>
