@@ -43,6 +43,10 @@ const Search = styled.div`
   gap: 26px
 `
 
+const InputSearch = styled.input`
+  width: calc(100% - 50px);
+`
+
 const Icon = styled.div`
   height: 57px;
   width: 57px;
@@ -70,7 +74,7 @@ export default function Header() {
                 <Catalog/>
                 <Search style={inter.style}>
                     <Magnifier/>
-                    <input style={{width: 'calc(100% - 50px)'}} placeholder='Найти'/>
+                    <InputSearch placeholder='Найти'/>
                 </Search>
                 <Icon><Cart/></Icon>
                 <Icon><Chat/></Icon>

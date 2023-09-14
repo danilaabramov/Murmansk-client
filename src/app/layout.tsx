@@ -6,6 +6,7 @@ import React, {ReactNode} from 'react'
 import {NextFont} from "next/dist/compiled/@next/font";
 import Head from "next/head";
 import Header from "@/app/Header";
+import StyledComponentsRegistry from '../lib/registry'
 
 const inter: NextFont = Montserrat({weight: '400', subsets: ['latin', 'cyrillic']})
 
@@ -22,11 +23,12 @@ export default function RootLayout({children}: { children: ReactNode }) {
             <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link rel="icon" type='image/svg' sizes='32x32' href="/favicon.ico"/>
-            <title>Murmansk</title>
         </Head>
         <body className={inter.className}>
-        <Header/>
-        {children}
+        <StyledComponentsRegistry>
+            <Header/>
+            {children}
+        </StyledComponentsRegistry>
         </body>
         </html>
     )
