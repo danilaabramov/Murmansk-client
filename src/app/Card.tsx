@@ -63,9 +63,7 @@ export default function Card({product} : {product: Product}) {
                     {`${product.prevPrice} ₽`}
                 </PrevPrice>
             </PriceContainer>
-            <Title>
-                Ремонт деревенских тапочек в Мурмаске
-            </Title>
+            <Title>{product.title}</Title>
         </CardContainer>
     )
 }
