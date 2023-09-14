@@ -1,12 +1,13 @@
-import '../styles/globals.css'
-import '../styles/reset.css'
+import '@/styles/globals.css'
+import '@/styles/reset.css'
 import type {Metadata} from 'next'
-import {Roboto} from 'next/font/google'
+import {Montserrat} from 'next/font/google'
 import React, {ReactNode} from 'react'
 import {NextFont} from "next/dist/compiled/@next/font";
 import Head from "next/head";
+import Header from "@/app/Header";
 
-const inter: NextFont = Roboto({weight: '400', subsets: ['latin', 'cyrillic']})
+const inter: NextFont = Montserrat({weight: '400', subsets: ['latin', 'cyrillic']})
 
 export const metadata: Metadata = {
     title: 'Murmansk | Главная страница',
@@ -23,7 +24,10 @@ export default function RootLayout({children}: { children: ReactNode }) {
             <link rel="icon" type='image/svg' sizes='32x32' href="/favicon.ico"/>
             <title>Murmansk</title>
         </Head>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+        <Header/>
+        {children}
+        </body>
         </html>
     )
 }
