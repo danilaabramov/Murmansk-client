@@ -13,7 +13,8 @@ const CardContainer = styled.div`
   height: 430px;
   padding: 15px;
   background: #fff;
-  border-radius: 18px
+  border-radius: 18px;
+  box-shadow: 13.41523px 8.90378px 44.5189px 0px rgba(199, 199, 199, 0.60);
 `
 
 const ImageContainer = styled.div`
