@@ -11,6 +11,7 @@ import {Montserrat} from "next/font/google";
 import SvoyLogo from "@/icons/SvoyLogo";
 import Grid from "@/icons/Grid";
 import Location from "@/icons/Location";
+import Link from "next/link";
 
 const inter: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
 
@@ -38,6 +39,7 @@ const MiddleHeaderContainer = styled.div<{ scroll: number }>`
   margin-top: ${(props): string => (props.scroll >= 40 ? '-40px' : '0')};
   width: 100vw;
   background: #9BCBBA;
+  z-index: 1000;
 `;
 
 const BottomHeaderContainer = styled.div<{ scroll: number }>`
@@ -147,7 +149,9 @@ export default function Header() {
                     </LinksTop>
                 </TopHeaderContainer>
                 <MiddleHeaderContainer scroll={scroll}>
-                    <Logo className={inter.className}><SvoyLogo/></Logo>
+                    <Link href='/'>
+                        <Logo className={inter.className}><SvoyLogo/></Logo>
+                    </Link>
                     <Catalog><Grid/>Каталог</Catalog>
                     <Search>
                         <Magnifier/>

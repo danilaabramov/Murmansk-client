@@ -1,25 +1,27 @@
+"use client"
+
 import Image from "next/image";
 import React from "react";
 import Product from "@/types/product";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Montserrat} from "next/font/google";
 import styled from "styled-components";
+import Link from "next/link";
 
 const inter700: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
 const inter300: NextFont = Montserrat({weight: '300', subsets: ['latin', 'cyrillic']})
 
 const CardContainer = styled.div`
-  width: 300px;
-  height: 430px;
-  padding: 15px;
+  width: calc((100vw - 280px) / 5);
   background: #fff;
   border-radius: 18px;
-  box-shadow: 13.41523px 8.90378px 44.5189px 0px rgba(199, 199, 199, 0.60);
+  padding: 15px;
+  box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.60);
 `
 
 const ImageContainer = styled.div`
-  width: 270px;
-  height: 270px;
+  width: 100%;
+  height: calc((100vw - 280px) / 5 - 30px);
   border-radius: 18px
 `
 
@@ -51,19 +53,21 @@ const Title = styled.div`
 
 export default function Card({product} : {product: Product}) {
     return (
-        <CardContainer>
-            <ImageContainer>
-                <Image src={product.image} alt=''></Image>
-            </ImageContainer>
-            <PriceContainer>
-                <Price className={inter700.className}>
-                    {`${product.price} ₽`}
-                </Price>
-                <PrevPrice className={inter300.className}>
-                    {`${product.prevPrice} ₽`}
-                </PrevPrice>
-            </PriceContainer>
-            <Title>{product.title}</Title>
-        </CardContainer>
+        <Link href={{pathname: `/product/${product.title}`, query: {product: JSON.stringify(product)}}}>
+            <CardContainer>
+                <ImageContainer>
+                    <Image src={product.image} alt='' style={{width: '100%', height: '100%'}}></Image>
+                </ImageContainer>
+                <PriceContainer>
+                    <Price className={inter700.className}>
+                        {`${product.price} ₽`}
+                    </Price>
+                    <PrevPrice className={inter300.className}>
+                        {`${product.prevPrice} ₽`}
+                    </PrevPrice>
+                </PriceContainer>
+                <Title>{product.title}</Title>
+            </CardContainer>
+        </Link>
     )
 }

@@ -10,8 +10,7 @@ const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
-  padding: 29px 0;
+  padding: 29px 90px;
 `
 
 export default function Cards() {
