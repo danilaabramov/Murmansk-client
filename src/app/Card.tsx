@@ -46,7 +46,6 @@ const Title = styled.div`
   height: 75px;
   display: flex;
   align-items: center
-
 `
 
 export default function Card({product} : {product: Product}) {

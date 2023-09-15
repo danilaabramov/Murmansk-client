@@ -3,7 +3,6 @@
 import React from "react";
 import products from "@/models/products";
 import Product from "@/types/product";
-import Image from "next/image";
 import styled from "styled-components";
 import Card from "@/app/Card";
 
@@ -12,14 +11,15 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  padding: 29px 0;
 `
 
 export default function Cards() {
     return (
         <CardsContainer>
             {
-                products.map((item: Product) => (
-                    <Card product={item}/>
+                products.map((item: Product, index: number) => (
+                    <Card product={item} key={index}/>
                 ))
             }
         </CardsContainer>

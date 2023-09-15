@@ -1,9 +1,16 @@
-import Cards from "@/app/Cards";
+"use client"
 
+import Cards from "@/app/Cards";
+import styled from "styled-components";
+
+
+const HomeContainer = styled.div`
+  background: #F1F1F1
+`
 export default function Home() {
   return (
-      <div>
+      <HomeContainer>
         <Cards/>
-      </div>
+      </HomeContainer>
   )
 }
