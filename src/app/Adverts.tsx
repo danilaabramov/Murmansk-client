@@ -10,9 +10,10 @@ export default function Adverts() {
     const [currentAdvert, setCurrentAdvert] = useState<number[]>([0, 0])
 
     const CarouselContainer = styled.div`
-      max-width: 1502px;
+      max-width: 1504px;
       display: flex;
-      align-items: center
+      align-items: center;
+      margin: 0 32px;
     `
 
     const CarouselWrapper = styled.div`

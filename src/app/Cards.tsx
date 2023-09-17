@@ -10,8 +10,8 @@ const CardsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin: 29px 0;
-  max-width: 1502px;
+  margin: 29px 32px;
+  max-width: 1504px;
 `
 
 export default function Cards() {

@@ -17,8 +17,8 @@ const HomeContainer = styled.div`
 
 const H1 = styled.h1`
   font-size: 40px;
-  max-width: 1502px;
-  width: 100%;
+  max-width: 1504px;
+  width: calc(100% - 64px);
 `
 
 export default function Home() {
