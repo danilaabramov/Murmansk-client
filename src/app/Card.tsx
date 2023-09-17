@@ -21,7 +21,7 @@ const CardContainer = styled.div`
 
 const ImageContainer = styled.div`
   width: 100%;
-  height: calc((100vw - 280px) / 5 - 30px);
+  aspect-ratio: 1;
   border-radius: 18px
 `
 
@@ -56,7 +56,7 @@ export default function Card({product}: { product: Product }) {
         <CardContainer>
             <Link href={{pathname: `/product/${product.title}`, query: {product: JSON.stringify(product)}}}>
                 <ImageContainer>
-                    <Image src={product.image} alt='' style={{width: '100%', height: '100%'}}></Image>
+                    <Image src={product.image} alt='product image' style={{width: '100%', height: '100%', objectFit: 'cover'}}></Image>
                 </ImageContainer>
                 <PriceContainer>
                     <Price className={inter700.className}>

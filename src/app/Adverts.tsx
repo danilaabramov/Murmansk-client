@@ -3,7 +3,7 @@
 import adverts from "@/models/adverts";
 import Advert from "@/app/Advert";
 import ArrowForward from "@/icons/ArrowForward";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
 export default function Adverts() {
@@ -72,12 +72,12 @@ export default function Adverts() {
         const interval: NodeJS.Timeout = setInterval(
             () => setCurrentAdvert(
                 (ca: number[]): number[] => ca[1] < adverts.length - 1 ? [ca[1], ++ca[1]] : [ca[1], 0]
-            ), 5000
+            ), 10000
         )
         return (): void => {
             clearInterval(interval)
         }
-    }, [])
+    }, [...currentAdvert])
 
     return (
         <CarouselContainer>
