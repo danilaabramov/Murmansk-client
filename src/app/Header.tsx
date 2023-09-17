@@ -12,12 +12,53 @@ import SvoyLogo from "@/icons/SvoyLogo";
 import Grid from "@/icons/Grid";
 import Location from "@/icons/Location";
 import Link from "next/link";
+import Home from "@/icons/Home";
+import Person from "@/icons/Person";
 
 const inter: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
+
+const MobileMenu = styled.div`
+  height: 52px;
+  background: #fff;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .1);  
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
+const MobileIcon = styled.div`
+  width: calc(100% / 5);
+  
+  & a {
+    width: 100%;
+    height: 52px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+`;
 
 const HeaderContainer = styled.header`
   height: 170px;
   background: #9BCBBA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 1199px) {
+    height: 260px;
+  }
+
+  @media (max-width: 1023px) {
+    height: 60px;
+  }
 `;
 
 const TopHeaderContainer = styled.div`
@@ -26,20 +67,64 @@ const TopHeaderContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 40px;
-  padding: 0 90px;
+  max-width: 1504px;
+  width: calc(100% - 64px);
+
+  @media (max-width: 1199px) {
+    width: calc(100% - 32px);
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 const MiddleHeaderContainer = styled.div<{ scroll: number }>`
   display: flex;
-  gap: 20px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 90px;
   position: ${(props): string => (props.scroll >= 40 ? 'fixed' : '')};
-  margin-top: ${(props): string => (props.scroll >= 40 ? '-40px' : '0')};
-  width: 100vw;
   background: #9BCBBA;
   z-index: 1000;
+  width: 100%;
+  padding: 0 max(32px, calc((100% - 1504px) / 2));
+  flex-wrap: wrap;
+
+  @media (max-width: 1199px) {
+    padding: 0 max(16px, calc((100% - 1504px) / 2));
+    height: 180px;
+  }
+
+  @media (max-width: 1023px) {
+    height: 60px;
+    position: fixed;
+    gap: 20px;
+    padding: 0 max(16px, calc((100% - 1504px) / 2));
+  }
+`;
+
+const LeftHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 90px;
+  gap: 20px;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+`;
+
+const RightHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  height: 90px;
+  gap: 20px;
+
+  @media (max-width: 1023px) {
+    gap: 0;
+    height: 60px;
+  }
 `;
 
 const BottomHeaderContainer = styled.div<{ scroll: number }>`
@@ -49,7 +134,18 @@ const BottomHeaderContainer = styled.div<{ scroll: number }>`
   justify-content: space-between;
   margin-top: ${(props): string => (props.scroll >= 40 ? '90px' : '0')};
   color: rgba(0, 0, 0, ${(props): number => (20 / props.scroll)});
-  padding: 0 90px;
+  max-width: 1504px;
+  width: calc(100% - 64px);
+
+  @media (max-width: 1199px) {
+    margin-top: ${(props): string => (props.scroll >= 40 ? '180px' : '0')};
+    width: calc(100% - 32px);
+  }
+
+  @media (max-width: 1023px) {
+    margin-top: ${(props): string => (props.scroll >= 40 ? '90px' : '0')};
+    display: none;
+  }
 `;
 
 const Logo = styled.div`
@@ -67,18 +163,32 @@ const Catalog = styled.div`
   justify-content: center;
   gap: 8px;
   font-size: 18px;
-
 `
 
 const Search = styled.div`
   height: 57px;
-  width: calc(100vw - 820px);
+  width: calc(100% - 650px);
   background: #EDEDED;
   border-radius: 18px;
   display: flex;
   align-items: center;
   padding: 0 23px;
-  gap: 26px
+  gap: 26px;
+  flex-grow: 1;
+  position: relative;
+  margin: 0 20px;
+
+  @media (max-width: 1199px) {
+    width: 100%;
+    order: 1;
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    order: 0;
+    width: calc(100% - 230px);
+    height: 48px;
+  }
 `
 
 const InputSearch = styled.input`
@@ -94,6 +204,16 @@ const Icon = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 1023px) {
+    display: none;
+
+    &:nth-child(2) {
+      display: flex;
+      width: 48px;
+      height: 48px;
+    }
+  }
 `
 
 const Avatar = styled.div`
@@ -102,6 +222,10 @@ const Avatar = styled.div`
   background: #EDEDED;
   border-radius: 100%;
   cursor: pointer;
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `
 
 const LinksTop = styled.div`
@@ -137,39 +261,50 @@ export default function Header() {
     })
 
     return (
-
-            <HeaderContainer>
-                <TopHeaderContainer>
-                    <LocationContainer><Location/>Мурмурманск</LocationContainer>
-                    <LinksTop>
-                        <LinkTop>Стать продавцом</LinkTop>
-                        <LinkTop>О маркетплейсе</LinkTop>
-                        <LinkTop>Бла бла бла бла</LinkTop>
-                        <LinkTop>Абудаби детка</LinkTop>
-                    </LinksTop>
-                </TopHeaderContainer>
-                <MiddleHeaderContainer scroll={scroll}>
+        <HeaderContainer>
+            <TopHeaderContainer>
+                <LocationContainer><Location/>Мурмурманск</LocationContainer>
+                <LinksTop>
+                    <LinkTop>Стать продавцом</LinkTop>
+                    <LinkTop>О маркетплейсе</LinkTop>
+                    <LinkTop>Бла бла бла бла</LinkTop>
+                    <LinkTop>Абудаби детка</LinkTop>
+                </LinksTop>
+            </TopHeaderContainer>
+            <MiddleHeaderContainer scroll={scroll}>
+                <LeftHeaderContainer>
                     <Link href='/'>
                         <Logo className={inter.className}><SvoyLogo/></Logo>
                     </Link>
                     <Catalog><Grid/>Каталог</Catalog>
-                    <Search>
-                        <Magnifier/>
-                        <InputSearch placeholder='Поиск услуги'/>
-                    </Search>
+                </LeftHeaderContainer>
+                <Search>
+                    <Magnifier/>
+                    <InputSearch placeholder='Поиск услуги'/>
+                </Search>
+                <RightHeaderContainer>
                     <Icon><Cart/></Icon>
                     <Icon><Chat/></Icon>
                     <Icon><Notifications/></Icon>
                     <Link href='/cabinet'><Avatar/></Link>
-                </MiddleHeaderContainer>
-                <BottomHeaderContainer scroll={scroll}>
-                    <LinkBottom>Категория</LinkBottom>
-                    <LinkBottom>Категория</LinkBottom>
-                    <LinkBottom>Категория</LinkBottom>
-                    <LinkBottom>Категория</LinkBottom>
-                    <LinkBottom>Категория</LinkBottom>
-                    <LinkBottom>Категория</LinkBottom>
-                </BottomHeaderContainer>
-            </HeaderContainer>
+                </RightHeaderContainer>
+            </MiddleHeaderContainer>
+            <BottomHeaderContainer scroll={scroll}>
+                <LinkBottom>Категория</LinkBottom>
+                <LinkBottom>Категория</LinkBottom>
+                <LinkBottom>Категория</LinkBottom>
+                <LinkBottom>Категория</LinkBottom>
+                <LinkBottom>Категория</LinkBottom>
+                <LinkBottom>Категория</LinkBottom>
+            </BottomHeaderContainer>
+
+            <MobileMenu>
+                <MobileIcon><Link href='/'><Home/></Link></MobileIcon>
+                <MobileIcon><Link href='/'><Grid/></Link></MobileIcon>
+                <MobileIcon><Link href='/'><Cart/></Link></MobileIcon>
+                <MobileIcon><Link href='/'><Notifications/></Link></MobileIcon>
+               <MobileIcon><Link href='/cabinet' ><Person/></Link></MobileIcon>
+            </MobileMenu>
+        </HeaderContainer>
     )
 }

@@ -27,7 +27,7 @@ const StoreContainer = styled.div`
     border-radius: 18px;
     padding: 15px;
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
-    margin: 0px 0px 3vw 0px;
+    margin: 0 0 3vw 0;
 `;
 
 const ImageContainer = styled.div`
