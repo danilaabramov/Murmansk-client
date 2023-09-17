@@ -30,7 +30,7 @@ const MainCard = styled.div`
 `
 
 const Card = styled.div`
-    width: calc((100vw - 216px) / 2);
+    width: calc((100% - 20px) / 2);
     height: 300px;
     background: #fff;
     border-radius: 18px;
