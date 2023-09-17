@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
 import { Montserrat } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
-import Image from "next/image";
-import Product from "@/types/product";
 
 const inter: NextFont = Montserrat({
     weight: "700",
