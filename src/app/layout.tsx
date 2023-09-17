@@ -7,7 +7,6 @@ import {NextFont} from "next/dist/compiled/@next/font";
 import Head from "next/head";
 import Header from "@/app/Header";
 import StyledComponentsRegistry from '@/lib/registry'
-import styled from "styled-components";
 
 const inter: NextFont = Montserrat({weight: '400', subsets: ['latin', 'cyrillic']})
 

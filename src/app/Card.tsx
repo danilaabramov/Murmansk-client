@@ -12,7 +12,7 @@ const inter700: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrill
 const inter300: NextFont = Montserrat({weight: '300', subsets: ['latin', 'cyrillic']})
 
 const CardContainer = styled.div`
-  width: calc((100vw - 280px) / 5);
+  width: calc((100% - 80px) / 5);
   background: #fff;
   border-radius: 18px;
   padding: 15px;
@@ -51,10 +51,10 @@ const Title = styled.div`
   align-items: center
 `
 
-export default function Card({product} : {product: Product}) {
+export default function Card({product}: { product: Product }) {
     return (
-        <Link href={{pathname: `/product/${product.title}`, query: {product: JSON.stringify(product)}}}>
-            <CardContainer>
+        <CardContainer>
+            <Link href={{pathname: `/product/${product.title}`, query: {product: JSON.stringify(product)}}}>
                 <ImageContainer>
                     <Image src={product.image} alt='' style={{width: '100%', height: '100%'}}></Image>
                 </ImageContainer>
@@ -67,7 +67,7 @@ export default function Card({product} : {product: Product}) {
                     </PrevPrice>
                 </PriceContainer>
                 <Title>{product.title}</Title>
-            </CardContainer>
-        </Link>
+            </Link>
+        </CardContainer>
     )
 }

@@ -1,22 +1,108 @@
 "use client"
 
-import advert from "@/models/advert";
+import adverts from "@/models/adverts";
 import Advert from "@/app/Advert";
+import ArrowForward from "@/icons/ArrowForward";
+import {useEffect, useState} from "react";
+import styled from "styled-components";
 
 export default function Adverts() {
+    const [currentAdvert, setCurrentAdvert] = useState<number[]>([0, 0])
+
+    const CarouselContainer = styled.div`
+      max-width: 1502px;
+      display: flex;
+      align-items: center
+    `
+
+    const CarouselWrapper = styled.div`
+      margin: 50px 0;
+      width: 100%;
+      aspect-ratio: 16 / 5;
+      overflow: hidden;
+      display: flex;
+      gap: 90px;
+      border-radius: 18px
+    `
+
+    const Carousel = styled.div`
+      z-index: 0;
+      animation: slide 1s ease-in-out forwards;
+      display: flex;
+      
+      @keyframes slide {
+        from { transform: translateX(calc(-100% * ${currentAdvert[0]})); }
+        to { transform: translateX(calc(-100% *  ${currentAdvert[1]})); }
+      }
+    `
+
+    const ArrowLeft = styled.div`
+      width: 55px;
+      height: 55px;
+      position: relative;
+      background: rgba(217, 217, 217, .5);
+      border-radius: 100%;
+      transform: translate(22px, 0);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1
+    `
+
+    const Arrow = styled.div`
+      width: 0
+    `
+
+    const ArrowRight = styled.div`
+      width: 55px;
+      height: 55px;
+      position: relative;
+      background: rgba(217, 217, 217, .5);
+      border-radius: 100%;
+      transform: translate(-77px, 0) rotate(180deg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1
+    `
+
+    useEffect((): () => void => {
+        const interval: NodeJS.Timeout = setInterval(
+            () => setCurrentAdvert(
+                (ca: number[]): number[] => ca[1] < adverts.length - 1 ? [ca[1], ++ca[1]] : [ca[1], 0]
+            ), 5000
+        )
+        return (): void => {
+            clearInterval(interval)
+        }
+    }, [])
+
     return (
-        <>
-            <div style={{width: 55, height: 55, position: 'absolute', background: 'rgba(217, 217, 217, .5)', borderRadius: '100%',
-                transform: 'translate(112px, calc(-2px + ((100vw - 180px) / 32 * 5)))', cursor: 'pointer'}}></div>
-            <div style={{width: 55, height: 55, position: 'absolute', background: 'rgba(217, 217, 217, .5)', borderRadius: '100%', right: 0,
-                transform: 'translate(-112px, calc(-2px + ((100vw - 180px) / 32 * 5)))', cursor: 'pointer'}}></div>
-            <div style={{padding: '50px 90px', aspectRatio: 16 / 5, overflow: 'hidden', display: 'flex', gap: 90}}>
-                {
-                    advert.map((item : any, index: number) => (
-                        <Advert image={item.image} key={index}/>
-                    ))
-                }
-            </div>
-        </>
+        <CarouselContainer>
+            <Arrow>
+                <ArrowLeft onClick={() => setCurrentAdvert(
+                    (ca: number[]): number[] => ca[1] ? [ca[1], --ca[1]] : [ca[1], adverts.length - 1] )}>
+                    <ArrowForward/>
+                </ArrowLeft>
+            </Arrow>
+                    <CarouselWrapper>
+                        <Carousel>
+                            {
+                                adverts.map((item: any, index: number) => (
+                                    <Advert image={item.image} key={index}/>
+                                ))
+                            }
+                        </Carousel>
+                    </CarouselWrapper>
+            <Arrow>
+                <ArrowRight onClick={() => setCurrentAdvert(
+                    (ca: number[]): number[] => ca[1] < adverts.length - 1 ? [ca[1], ++ca[1]] : [ca[1], 0]
+                )}>
+                    <ArrowForward/>
+                </ArrowRight>
+            </Arrow>
+        </CarouselContainer>
     )
 }

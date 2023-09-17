@@ -137,7 +137,7 @@ export default function Header() {
     })
 
     return (
-        <div>
+
             <HeaderContainer>
                 <TopHeaderContainer>
                     <LocationContainer><Location/>Мурмурманск</LocationContainer>
@@ -160,7 +160,7 @@ export default function Header() {
                     <Icon><Cart/></Icon>
                     <Icon><Chat/></Icon>
                     <Icon><Notifications/></Icon>
-                    <Avatar/>
+                    <Link href='/cabinet'><Avatar/></Link>
                 </MiddleHeaderContainer>
                 <BottomHeaderContainer scroll={scroll}>
                     <LinkBottom>Категория</LinkBottom>
@@ -171,6 +171,5 @@ export default function Header() {
                     <LinkBottom>Категория</LinkBottom>
                 </BottomHeaderContainer>
             </HeaderContainer>
-        </div>
     )
 }

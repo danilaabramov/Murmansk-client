@@ -9,12 +9,16 @@ import {Montserrat} from "next/font/google";
 const inter: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
 
 const HomeContainer = styled.div`
-  background: #F1F1F1
+  background: #F1F1F1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `
 
 const H1 = styled.h1`
-  margin-left: 90px;
-  font-size: 40px
+  font-size: 40px;
+  max-width: 1502px;
+  width: 100%;
 `
 
 export default function Home() {
