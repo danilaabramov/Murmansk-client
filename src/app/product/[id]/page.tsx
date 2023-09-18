@@ -4,6 +4,10 @@ import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
 import { Montserrat } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
+import Image from "next/image";
+import Product from "@/types/product";
+import Link from "next/link";
+import Edit from "@/icons/Edit";
 
 const inter: NextFont = Montserrat({
     weight: "700",
@@ -23,9 +27,32 @@ const StoreContainer = styled.div`
     height: 300px;
     background: #fff;
     border-radius: 18px;
-    padding: 15px;
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
-    margin: 0 0 3vw 0;
+    margin: 0px 0px 3vw 0px;
+    padding: 35px 35px 35px 35px;
+`;
+
+const StoreImageContainer = styled.div`
+    height: 225px;
+    width: 225px;
+    border-radius: 18px;
+    background: #000;
+    float: right;
+`;
+
+const StoreName = styled.div`
+    font-size: 30px;
+    color: #94a3b8;
+    line-height: 140%; /* 42px */
+    word-break: break-word;
+    margin: 25px 0px 0px 50px;
+`;
+
+const StoreDesc = styled.div`
+    font-size: 20px;
+    line-height: 140%; /* 42px */
+    word-break: break-word;
+    margin: 25px 0px 0px 50px;
 `;
 
 const ImageContainer = styled.div`
@@ -41,13 +68,13 @@ const Desc = styled.div`
     font-size: 30px;
     color: #94a3b8;
     line-height: 140%; /* 42px */
-    word-break: break-all;
+    word-break: break-word;
 `;
 
 const ReDesc = styled.div`
     font-size: 20px;
     line-height: 140%; /* 42px */
-    word-break: break-all;
+    word-break: break-word;
 `;
 
 const BuyContainer = styled.div`
@@ -87,7 +114,7 @@ const Card = styled.div`
     height: 300px;
     background: #fff;
     border-radius: 18px;
-    padding: 30px 30px 30px 30px;
+    padding: 50px 50px 50px 50px;
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
 `;
 
@@ -96,6 +123,24 @@ const CardContent = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+`;
+
+const DateField = styled.div`
+    font-size: 15px;
+    line-height: 140%; /* 42px */
+    word-break: break-word;
+`;
+
+const Comments = styled.div`
+    font-size: 15px;
+    line-height: 140%; /* 42px */
+    word-break: break-word;
+    float: right;
+    color: #9bcbba;
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 export default function Product() {
@@ -103,7 +148,19 @@ export default function Product() {
     return (
         <PositionContainer>
             <div style={{ padding: "3vw 10vw 3vw 10vw" }}>
-                <StoreContainer></StoreContainer>
+                <StoreContainer>
+                    <StoreImageContainer></StoreImageContainer>
+                    <StoreName>Модус</StoreName>
+                    <StoreDesc>
+                        Магазин модной одежды и обуви в Мурманске. У нас вы
+                        сможете подобрать: Верхнюю одежду, платья, блузы, брюки,
+                        костюмы, свитера, туники, футболки. А также большой
+                        ассортимент комфортной обуви.
+                    </StoreDesc>
+                    <StoreDesc style={{ fontSize: "15px" }}>
+                        ​Проспект Кирова, 49 (4 филиала)
+                    </StoreDesc>
+                </StoreContainer>
                 <div style={{ height: "26.6vw", margin: "0px 0px 3vw 0px" }}>
                     <div
                         style={{
@@ -114,7 +171,21 @@ export default function Product() {
                             style={{
                                 margin: "0px 5vw 0px 0px",
                             }}
-                        ></ImageContainer>
+                        >
+                            <Image
+                                src={
+                                    JSON.parse(
+                                        searchParams.get("product") as string
+                                    ).image
+                                }
+                                alt="product image"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                }}
+                            ></Image>
+                        </ImageContainer>
                         <div style={{ margin: "0px 0px 2vw 0px" }}>
                             <H1
                                 className={inter.className}
@@ -128,10 +199,16 @@ export default function Product() {
                             </H1>
 
                             <Desc style={{ margin: "2vw 0px 0px 0px" }}>
-                                ДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДес
+                                Эффектные модные туфли - на устойчивом каблуке
+                                для истинных леди
                             </Desc>
                             <ReDesc style={{ margin: "2vw 0px 0px 0px" }}>
-                                ДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДескрипшнДес
+                                Удобная колодка позволит Вам провести на ногах
+                                целый день. Наличие платформы обеспечивает
+                                комфорт и удобство, высота каблука неощутима.
+                                Элегантные удобные женские туфли на высоком
+                                подъёме. Представленная модель выполнена из
+                                искусственной мягкой кожи.
                             </ReDesc>
                         </div>
                     </div>
@@ -160,19 +237,56 @@ export default function Product() {
                 <ReviewsContainer style={{ margin: "2vw 0px 0px 0px" }}>
                     <Card>
                         <CardContent>
-                            <Desc className={inter.className}>Лида</Desc>
+                            <Desc>Вероника</Desc>
                             <ReDesc>
-                                Отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв
-                                отзыв отзыв отзыв отзыв отзыв отзыв отзыв отзыв
-                                отзыв отзыв отзыв отзыв отзыв отзыв
+                                Легкие, удобные, каблук даже не ощущается, мне
+                                понравились, ношу с удовольствием. Спасибо
+                                производителю.
                             </ReDesc>
+                            <div>
+                                <DateField style={{ float: "left" }}>
+                                    18 сент 2023
+                                </DateField>
+                                <Comments>
+                                    <Edit />
+                                    <Link
+                                        href=""
+                                        style={{
+                                            margin: "0px 0px 0px 5px",
+                                        }}
+                                    >
+                                        Комментировать
+                                    </Link>
+                                </Comments>
+                            </div>
                         </CardContent>
                     </Card>
 
                     <Card>
                         <CardContent>
-                            <Desc className={inter.className}>Мои отзывы</Desc>
-                            <ReDesc>Избранное</ReDesc>
+                            <Desc>Виктория</Desc>
+                            <ReDesc>
+                                Брала дочке. Подошли на 41 длина 26,5. Носит с
+                                удовольствием, легкие, но кожаные думаю были бы
+                                практичнее, и вытирать проще и следы не
+                                остаются.
+                            </ReDesc>
+                            <div>
+                                <DateField style={{ float: "left" }}>
+                                    18 сент 2023
+                                </DateField>
+                                <Comments>
+                                    <Edit />
+                                    <Link
+                                        href=""
+                                        style={{
+                                            margin: "0px 0px 0px 5px",
+                                        }}
+                                    >
+                                        Комментировать
+                                    </Link>
+                                </Comments>
+                            </div>
                         </CardContent>
                     </Card>
                 </ReviewsContainer>
