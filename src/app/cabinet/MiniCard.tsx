@@ -15,27 +15,28 @@ const CardContainer = styled.div`
   width: 140px;
   height: 188px;
   background: #fff;
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 15px;
   box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.60);
 `
 
 const ImageContainer = styled.div`
-  width: 100px;
-  border-radius: 18px
+  width: 115px;
+  height: 115px;
+  border-radius: 8px;
 `
 
 const PriceContainer = styled.div`
-  height: 31px;
-  font-size: 22px;
-  display: flex;
-  align-items: flex-end;
-  margin-top: 25px
+    height: 17.079px;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 15px
 `
 
 const Price = styled.div`
   line-height: 31px;
-  width: 92px
+  width: 55px
 `
 
 const PrevPrice = styled.div`
@@ -46,9 +47,10 @@ const PrevPrice = styled.div`
 `
 
 const Title = styled.div`
-  height: 75px;
+  height: 20px;
   display: flex;
-  align-items: center
+  align-items: center;
+  font-size: 6px;
 `
 
 export default function Card({product} : {product: Product}) {

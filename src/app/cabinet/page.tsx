@@ -6,7 +6,8 @@ import Image from "next/image";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Montserrat} from "next/font/google";
 import Edit from "@/icons/Edit";
-import MiniCard from "@/app/cabinet/MiniCard"
+import MiniCard from "@/app/cabinet/MiniCards"
+import Link from "next/link";
 
 const inter: NextFont = Montserrat({weight: '600', subsets: ['latin', 'cyrillic']})
 
@@ -96,7 +97,7 @@ const H2 = styled.h2`
 
 const Text = styled.div`
     margin-left: 30px;
-    margin-top: 30px;
+    margin-top: 15px;
     font-size: 14px
 `
 
@@ -124,25 +125,32 @@ export default function cabinet() {
 
                     </MainCardContent>
                 </MainCard>
-    
-                <Card>
-                    <CardContent>
-                        <H2 className={inter.className}>Избранное</H2>
-                        <Text>
-                        </Text>
-                    </CardContent>
-                </Card>
 
-                <Card> 
-                    <CardContent>
-                        <H2 className={inter.className}>Мои отзывы</H2>
-                    </CardContent>  
+                <Card>
+                    <Link href="/favourites">
+                        <CardContent>
+                            <H2 className={inter.className}>Избранное</H2>
+                            <Text>
+                                <MiniCard/>
+                            </Text>
+                        </CardContent>
+                    </Link>
                 </Card>
 
                 <Card>
-                    <CardContent>
-                        <H2 className={inter.className}>Покупки</H2>
-                    </CardContent>
+                    <Link href=""> 
+                        <CardContent>
+                            <H2 className={inter.className}>Мои отзывы</H2>
+                        </CardContent>
+                    </Link>  
+                </Card>
+
+                <Card>
+                    <Link href="">
+                        <CardContent>
+                            <H2 className={inter.className}>Покупки</H2>
+                        </CardContent>
+                    </Link>
                 </Card>
 
                 <Card>
