@@ -4,8 +4,6 @@ import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
 import { Montserrat } from "next/font/google";
 import { NextFont } from "next/dist/compiled/@next/font";
-import Image from "next/image";
-import Product from "@/types/product";
 
 const inter: NextFont = Montserrat({
     weight: "700",
@@ -27,7 +25,7 @@ const StoreContainer = styled.div`
     border-radius: 18px;
     padding: 15px;
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
-    margin: 0px 0px 3vw 0px;
+    margin: 0 0 3vw 0;
 `;
 
 const ImageContainer = styled.div`

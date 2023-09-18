@@ -16,13 +16,24 @@ const CardContainer = styled.div`
   background: #fff;
   border-radius: 18px;
   padding: 15px;
-  box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.60);
+  box-shadow: 0 0 44.5189px 0 rgba(199, 199, 199, .4);
+
+  @media (max-width: 1199px) {
+    width: calc((100% - 40px) / 5);
+  }
+  
+  @media (max-width: 1023px) {
+    width: calc((100% - 10px) / 2);
+    font-size: 14px;
+    padding: 10px;
+  }
 `
 
 const ImageContainer = styled.div`
   width: 100%;
   aspect-ratio: 1;
-  border-radius: 18px
+  border-radius: 18px;
+  overflow: hidden;
 `
 
 const PriceContainer = styled.div`
@@ -30,12 +41,16 @@ const PriceContainer = styled.div`
   font-size: 22px;
   display: flex;
   align-items: flex-end;
-  margin-top: 25px
+  margin-top: 25px;
+  gap: 5px;
+
+  @media (max-width: 1023px) {
+    font-size: 18px;
+  }
 `
 
 const Price = styled.div`
   line-height: 31px;
-  width: 92px
 `
 
 const PrevPrice = styled.div`

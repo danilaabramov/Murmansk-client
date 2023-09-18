@@ -13,17 +13,31 @@ export default function Adverts() {
       max-width: 1504px;
       display: flex;
       align-items: center;
-      margin: 0 32px;
+      margin: 32px 32px;
+
+      @media (max-width: 1199px) {
+        margin: 32px 16px;
+      }
+
+      @media (max-width: 1023px) {
+        margin: 16px 16px;
+      }
     `
 
     const CarouselWrapper = styled.div`
-      margin: 50px 0;
       width: 100%;
-      aspect-ratio: 16 / 5;
       overflow: hidden;
       display: flex;
       gap: 90px;
-      border-radius: 18px
+      border-radius: 18px;
+      
+      @media (min-width: 1024px) {
+        height: 370px;
+      }
+
+      @media (max-width: 1023px) {
+        aspect-ratio: 1.7;
+      }
     `
 
     const Carousel = styled.div`
@@ -52,7 +66,11 @@ export default function Adverts() {
     `
 
     const Arrow = styled.div`
-      width: 0
+      width: 0;
+
+      @media (max-width: 1023px) {
+        display: none;
+      }
     `
 
     const ArrowRight = styled.div`
