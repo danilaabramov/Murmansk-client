@@ -1,8 +1,10 @@
-import {SVGProps} from "react";
+import { SVGProps } from "react";
 
 export default interface Product {
-    title: string,
-    price: number,
-    prevPrice: number,
-    image: string
+    title: string;
+    price: number;
+    prevPrice: number;
+    desc: string;
+    reDesc: string;
+    image: string;
 }
