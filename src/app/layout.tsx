@@ -7,7 +7,8 @@ import {NextFont} from "next/dist/compiled/@next/font";
 import Head from "next/head";
 import Header from "@/app/Header";
 import StyledComponentsRegistry from '@/lib/registry'
-import { Providers } from "@/redux/Providers";
+import {Providers} from "@/redux/Providers";
+import {Auth} from "@/redux/Auth";
 
 const inter: NextFont = Montserrat({weight: '400', subsets: ['latin', 'cyrillic']})
 
@@ -27,8 +28,12 @@ export default function RootLayout({children}: { children: ReactNode }) {
         </Head>
         <body className={inter.className}>
         <StyledComponentsRegistry>
-            <Header/>
-            <Providers>{children}</Providers>
+            <Providers>
+                <Auth>
+                    <Header/>
+                    {children}
+                </Auth>
+            </Providers>
         </StyledComponentsRegistry>
         </body>
         </html>

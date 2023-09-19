@@ -7,8 +7,10 @@ import styled from "styled-components";
 import {NextFont} from "next/dist/compiled/@next/font";
 import {Montserrat} from "next/font/google";
 import {useDispatch, useSelector} from "react-redux";
-import {fetchRegister} from "@/redux/auth/user.api";
+import {fetchAuthMe, fetchLogin, fetchRegister, isAuth} from "@/redux/auth/user.api";
 import {ThunkDispatch} from "@reduxjs/toolkit";
+import {useRouter} from "next/navigation";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
 
 const inter: NextFont = Montserrat({weight: '700', subsets: ['latin', 'cyrillic']})
 
@@ -127,13 +129,15 @@ export default function RegistrationPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
-    const dispath = useDispatch<ThunkDispatch<any, any, any>>();
+    const IsAuth: boolean  = useSelector(isAuth);
+    const dispatch: ThunkDispatch<any, any, any> = useDispatch<ThunkDispatch<any, any, any>>();
+    const router: AppRouterInstance = useRouter()
 
     const {
         register, handleSubmit
     } = useForm({
         defaultValues: {
-            userLastName: "", userFirstName: "", userPhone: "", email: "", userBDay: "", password1: "", password2: "",
+            userLastName: "", userFirstName: "", userPhone: "", userEmail: "", userBDay: "", password1: "", password2: "",
         }, reValidateMode: "onChange"
     });
 
@@ -143,34 +147,38 @@ export default function RegistrationPage() {
             setError('Короткий пароль')
         } else {
             setLoading(true)
-            const {payload} = await dispath(fetchRegister({
-                // userPassword: values.password1,
-                // userFirstName: values.userFirstName,
-                // userLastName: values.userLastName,
-                // userBDay: values.userBDay,
-                // userEmail: values.email,
-                // userPhone: values.userPhone
-                userPassword: '123123123',
-                userFirstName: 'qwewqeqwe',
-                userLastName: 'bebrabbebra',
-                userBDay: '2001-09-22',
-                userEmail: 'ru@ru.ru',
-                userPhone: '89123123123'
-            }));
-            setLoading(false)
-            // !payload?.user && alert("Не удалось авторизоваться");
-            console.log(payload)
-            // if ("access" in payload) {
-            //     window.localStorage.setItem("token", payload.access)
-            // }
+            const {payload} = await dispatch(fetchRegister({
+                userPassword: values.password1,
+                userFirstName: values.userFirstName,
+                userLastName: values.userLastName,
+                userBDay: values.userBDay,
+                userEmail: values.userEmail,
+                userPhone: values.userPhone
+            })).finally(async () => {
+                const {payload} = await dispatch(fetchLogin({
+                    userPassword: values.password1,
+                    userEmail: values.userEmail,
+                }))
+                // window.localStorage.setItem("token", payload.token)
+                if(!payload?.userEmail) {
+                    alert("Не удалось авторизоваться");
+                }
+                else {
+                    window.localStorage.setItem("userPassword", values.password1)
+                    window.localStorage.setItem("userEmail", values.userEmail)
+                }
+                setLoading(false)
+            })
         }
     };
 
-    useEffect(() => window.scrollTo(0, 0), [])
+    useEffect((): void => {
+        // dispatch(fetchAuthMe())
+        if(IsAuth)  router.push('/');
+    }, [IsAuth])
 
-    // if (IsAuth) return <Navigate to='/profile'/>
 
-    return (
+    if (!IsAuth) return (
         <RegisterContainer>
             <RegistrationForm onSubmit={handleSubmit(onSubmit)}>
                 <H1 className={inter.className}>Создание СвойID</H1>
@@ -222,7 +230,7 @@ export default function RegistrationPage() {
                 <FormGroup active={isFocused4}>
                     <FormLabel htmlFor="email">Email:</FormLabel>
                     <FormInput autoFocus={isFocused4}
-                               {...register("email", {required: "Укажите почту"})}
+                               {...register("userEmail", {required: "Укажите почту"})}
                                onFocus={() => {
                                    setIsFocused1(false)
                                    setIsFocused2(false)
@@ -284,7 +292,7 @@ export default function RegistrationPage() {
                     {loading ? 'Загрузка...' : 'Зарегистрироваться'}
                 </ButtonSubmit>
                 <FormLink>
-                    <Link href='/auth/login'>
+                    <Link href='/auth/register'>
                         Войти
                     </Link>
                 </FormLink>

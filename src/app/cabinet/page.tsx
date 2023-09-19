@@ -8,6 +8,12 @@ import {Montserrat} from "next/font/google";
 import Edit from "@/icons/Edit";
 import MiniCard from "@/app/cabinet/MiniCards"
 import Link from "next/link";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {isAuth, logout} from "@/redux/auth/user.api";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context";
+import {useRouter} from "next/navigation";
+import {ThunkDispatch} from "@reduxjs/toolkit";
 
 const inter: NextFont = Montserrat({weight: '600', subsets: ['latin', 'cyrillic']})
 
@@ -102,7 +108,18 @@ const Text = styled.div`
 `
 
 export default function cabinet() {
-    return (
+    const {data} = useSelector(({auth}) => auth);
+    const IsAuth: boolean = useSelector(isAuth);
+    const router: AppRouterInstance = useRouter()
+    const dispatch: ThunkDispatch<any, any, any> = useDispatch<ThunkDispatch<any, any, any>>();
+
+    useEffect((): void => {
+        // dispatch(fetchAuthMe())
+        if (!window.localStorage.getItem("userPassword")
+            && !window.localStorage.getItem("userEmail")) router.push('/auth/login');
+    }, [IsAuth])
+
+    if (IsAuth) return (
         <CabinetContainer>
             <CardsContainer>
                 <MainCard>
@@ -117,11 +134,19 @@ export default function cabinet() {
                             />
                         </Avatar>
 
-                        <Username className={inter.className}>Неопознанный енот</Username>
+                        <Username className={inter.className}>{`${data?.userFirstName} ${data?.userLastName}`}</Username>
                         
-                        <Email>enot@yandex.ru</Email>
+                        <Email>{data?.userEmail}</Email>
 
-                        <MainText><Edit/>Изменить данные</MainText>
+                        <div style={{display: 'flex'}}>
+                            <MainText><Edit/>Изменить данные</MainText>
+                            <MainText onClick={() => {
+                                dispatch(logout())
+                                window.localStorage.removeItem("userPassword")
+                                window.localStorage.removeItem("userEmail")
+                                router.push('/auth/login')
+                            }}>Выйти</MainText>
+                        </div>
 
                     </MainCardContent>
                 </MainCard>

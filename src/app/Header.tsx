@@ -304,7 +304,7 @@ export default function Header() {
                         <Notifications />
                     </Icon>
                     <Link href="/cabinet">
-                        <Avatar />
+                        <Avatar></Avatar>
                     </Link>
                 </RightHeaderContainer>
             </MiddleHeaderContainer>
