@@ -129,8 +129,8 @@ export default function RegistrationPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string>();
 
-    const IsAuth: boolean  = useSelector(isAuth);
     const dispatch: ThunkDispatch<any, any, any> = useDispatch<ThunkDispatch<any, any, any>>();
+    const IsAuth: boolean  = useSelector(isAuth);
     const router: AppRouterInstance = useRouter()
 
     const {
@@ -292,8 +292,8 @@ export default function RegistrationPage() {
                     {loading ? 'Загрузка...' : 'Зарегистрироваться'}
                 </ButtonSubmit>
                 <FormLink>
-                    <Link href='/auth/register'>
-                        Войти
+                    <Link href='/auth/login'>
+                        У вас уже есть аккаунт?
                     </Link>
                 </FormLink>
             </RegistrationForm>

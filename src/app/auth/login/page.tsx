@@ -187,7 +187,7 @@ export default function RegistrationPage() {
                     {loading ? 'Загрузка...' : 'Войти'}
                 </ButtonSubmit>
                 <FormLink>
-                    <Link href='/auth/login'>
+                    <Link href='/auth/register'>
                         Зарегистрироваться
                     </Link>
                 </FormLink>

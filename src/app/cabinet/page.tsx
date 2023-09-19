@@ -138,7 +138,7 @@ export default function cabinet() {
                         
                         <Email>{data?.userEmail}</Email>
 
-                        <div style={{display: 'flex'}}>
+                        <div style={{display: 'flex', gap: 10}}>
                             <MainText><Edit/>Изменить данные</MainText>
                             <MainText onClick={() => {
                                 dispatch(logout())

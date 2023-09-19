@@ -227,6 +227,7 @@ const ProductPrice = styled.h1`
 `;
 const ReviewTitle = styled.h1`
     font-size: 40px;
+  margin-top: 180px;
     @media (max-width: 1023px) {
         font-size: 20px;
     }
