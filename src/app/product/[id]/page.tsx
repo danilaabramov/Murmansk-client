@@ -18,6 +18,10 @@ const PositionContainer = styled.div`
     background: #f1f1f1;
 `;
 
+const PositionPage = styled.div`
+    background: #f1f1f1;
+`;
+
 const H1 = styled.h1`
     font-size: 40px;
 `;
@@ -30,6 +34,10 @@ const StoreContainer = styled.div`
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
     margin: 0px 0px 3vw 0px;
     padding: 35px 35px 35px 35px;
+    @media (max-width: 1023px) {
+        padding: 10px 10px 10px 10px;
+        height: 100px;
+    }
 `;
 
 const StoreImageContainer = styled.div`
@@ -38,6 +46,10 @@ const StoreImageContainer = styled.div`
     border-radius: 18px;
     background: #000;
     float: right;
+    @media (max-width: 1023px) {
+        width: 80px;
+        height: 80px;
+    }
 `;
 
 const StoreName = styled.div`
@@ -46,6 +58,10 @@ const StoreName = styled.div`
     line-height: 140%; /* 42px */
     word-break: break-word;
     margin: 25px 0px 0px 50px;
+    @media (max-width: 1023px) {
+        margin: 10px 0px 0px 10px;
+        font-size: 20px;
+    }
 `;
 
 const StoreDesc = styled.div`
@@ -53,6 +69,20 @@ const StoreDesc = styled.div`
     line-height: 140%; /* 42px */
     word-break: break-word;
     margin: 25px 0px 0px 50px;
+    @media (max-width: 1080px) {
+        display: none;
+    }
+`;
+
+const StoreAddress = styled.div`
+    fontsize: "15px";
+    line-height: 140%; /* 42px */
+    word-break: break-word;
+    margin: 25px 0px 0px 50px;
+    @media (max-width: 1023px) {
+        margin: 10px 0px 0px 10px;
+        font-size: 10px;
+    }
 `;
 
 const ImageContainer = styled.div`
@@ -69,12 +99,19 @@ const Desc = styled.div`
     color: #94a3b8;
     line-height: 140%; /* 42px */
     word-break: break-word;
+    @media (max-width: 1023px) {
+        margin: 5px 0px 0px 5px;
+        font-size: 10px;
+    }
 `;
 
 const ReDesc = styled.div`
     font-size: 20px;
     line-height: 140%; /* 42px */
     word-break: break-word;
+    @media (max-width: 1023px) {
+        font-size: 8px;
+    }
 `;
 
 const BuyContainer = styled.div`
@@ -84,6 +121,10 @@ const BuyContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 1023px) {
+        width: 125px;
+        height: 23.65px;
+    }
 `;
 
 const BuyButton = styled.div`
@@ -97,10 +138,17 @@ const BuyButton = styled.div`
     align-items: center;
     justify-content: center;
     box-shadow: 13.41523px 8.90378px 44.5189px 0 rgba(199, 199, 199, 0.6);
+    @media (max-width: 1023px) {
+        width: 87.5px;
+        height: 23.65px;
+    }
 `;
 
 const ButtonText = styled.div`
     font-size: 30px;
+    @media (max-width: 1023px) {
+        font-size: 10px;
+    }
 `;
 
 const ReviewsContainer = styled.div`
@@ -143,6 +191,47 @@ const Comments = styled.div`
     }
 `;
 
+const ProductName = styled.h1`
+    font-size: 40px;
+    max-width: 1504px;
+    width: calc(100% - 64px);
+
+    @media (max-width: 1199px) {
+        width: calc(100% - 32px);
+    }
+
+    @media (max-width: 1023px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 20px;
+    }
+`;
+const ProductContent = styled.div`
+    margin: 0px 0px 2vw 0px;
+`;
+const ProductPosition = styled.div`
+    height: 26.6vw;
+    margin: 0px 0px 3vw 0px;
+    @media (max-width: 1023px) {
+        margin: 0px 0px 0vw 0px;
+    }
+`;
+const ProductPrice = styled.h1`
+    font-size: 40px;
+
+    @media (max-width: 1023px) {
+        font-size: 20px;
+    }
+`;
+const ReviewTitle = styled.h1`
+    font-size: 40px;
+    @media (max-width: 1023px) {
+        font-size: 20px;
+    }
+`;
+
 export default function Product() {
     const searchParams = useSearchParams();
     return (
@@ -157,11 +246,9 @@ export default function Product() {
                         выгодная цена. Скидка 10% на весь ассортимент для новых
                         покупателей.
                     </StoreDesc>
-                    <StoreDesc style={{ fontSize: "15px" }}>
-                        ​Проспект Кирова, д.49
-                    </StoreDesc>
+                    <StoreAddress>​Проспект Кирова, д.49</StoreAddress>
                 </StoreContainer>
-                <div style={{ height: "26.6vw", margin: "0px 0px 3vw 0px" }}>
+                <ProductPosition>
                     <div
                         style={{
                             padding: "0px 5vw 0px 0px",
@@ -186,8 +273,8 @@ export default function Product() {
                                 }}
                             ></Image>
                         </ImageContainer>
-                        <div style={{ margin: "0px 0px 2vw 0px" }}>
-                            <H1
+                        <ProductContent>
+                            <ProductName
                                 className={inter.className}
                                 style={{ padding: "2vw 0px 0px 0px" }}
                             >
@@ -196,7 +283,7 @@ export default function Product() {
                                         searchParams.get("product") as string
                                     ).title
                                 }
-                            </H1>
+                            </ProductName>
 
                             <Desc style={{ margin: "2vw 0px 0px 0px" }}>
                                 {
@@ -212,10 +299,10 @@ export default function Product() {
                                     ).reDesc
                                 }
                             </ReDesc>
-                        </div>
+                        </ProductContent>
                     </div>
                     <BuyContainer>
-                        <H1
+                        <ProductPrice
                             className={inter.className}
                             style={{ float: "left" }}
                         >
@@ -225,16 +312,18 @@ export default function Product() {
                                 ).price
                             }
                             ₽
-                        </H1>
+                        </ProductPrice>
                         <BuyButton>
                             <ButtonText className={inter.className}>
                                 В корзину
                             </ButtonText>
                         </BuyButton>
                     </BuyContainer>
-                </div>
+                </ProductPosition>
                 <div style={{ margin: "0px 0px 0px 4vw" }}>
-                    <H1 className={inter.className}>Отзывы</H1>
+                    <ReviewTitle className={inter.className}>
+                        Отзывы
+                    </ReviewTitle>
                 </div>
                 <ReviewsContainer style={{ margin: "2vw 0px 0px 0px" }}>
                     <Card>
